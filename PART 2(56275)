@@ -1,0 +1,149 @@
+package final_project;
+import java.util.Scanner;
+import java.util.ArrayList;
+interface User {   // Interface of user with abstract method Login()
+    abstract void login();
+}
+class UserAccount implements User{
+    @Override
+    public void login(){
+        Scanner s=new Scanner(System.in);
+        String name;
+        String number;
+        String password;
+        String email;
+        String userInput;
+        
+        System.out.println("--------------------------------------");
+        System.out.println();
+        System.out.println("####### WELL COME #######");
+        System.out.println();
+        System.out.println("--------------------------------------");
+        System.out.println("Enter your name:");
+        name=s.nextLine();
+        
+        System.out.println("Enter your number:");
+        number=s.nextLine();
+        
+        System.out.println("Enter your email:");
+        email=s.nextLine();
+        
+        System.out.println("Enter your new password:");
+        password=s.nextLine();
+        
+        // Display User Information
+        System.out.println("");
+        System.out.println(".........Online User_Account  Information........");
+        System.out.println("User name: "+name);
+        System.out.println("User phone number: "+number);
+        System.out.println("User gmail: "+email);
+        System.out.println("User password: "+"*******");
+        
+          System.out.println("");
+          int attemptCount = 0;
+          do{
+        // To verify Password
+        System.out.println("Enter your password to verify!");
+        userInput=s.nextLine();
+        attemptCount++; // Increment attempt count
+        if(userInput.equals(password)){
+            System.out.println("Password verified. Access granted!");
+              System.out.println("");
+          return; // Exit the login method if password matches
+        }
+        
+        else{
+             System.out.println(" Incorrect Password.Access denied!");
+            System.out.println("Attempts remaining: " + (3 - attemptCount));
+             if (attemptCount == 3) {
+          System.out.println("Maximum login attempts reached. Program terminated!");
+          System.exit(1);// Terminate program with exit code 1 (indicating error)
+        }
+        
+    }     
+          }while(true);// Loop until password matches or attempts are exhausted
+  }
+}
+
+// Hospital Class
+class Hospital{
+    String name;
+    String address;
+    Hospital(String name, String address){  // Constructur of Hospital class
+        this.name=name;
+        this.address=address;
+    }
+     public void details(){
+         this.name = " ";
+         this.address = " ";
+}
+}
+
+class Patient{
+ public void Patient(String patientName, int age, String gender,String diease, String fatherName,String contact){
+         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter patient name:");
+        patientName = scanner.nextLine();
+         System.out.println("Enter patient father name:");
+        fatherName = scanner.nextLine();
+        System.out.println("Enter patient age:");
+        age = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter patient gender:");
+        gender = scanner.nextLine();
+         System.out.println("Enter Patient Disease's:");
+        diease =scanner.nextLine();
+        System.out.println("Enter patient contact number:");
+        contact = scanner.nextLine();
+        System.out.println("");
+        System.out.println("..Patient Details..");
+        System.out.println("Patient name: "+patientName);
+        System.out.println("Patient father name: "+fatherName);
+        System.out.println("Patient age: "+age);
+        System.out.println("Patient gender: "+gender);
+        System.out.println("Patient Diease's: "+diease);
+        System.out.println("Patient contact number: "+contact);
+    }
+    
+    public void Patient(String Blood){  // Method overloading
+        System.out.println("");
+        System.out.println("Patient Details are Stored Successfully! Now Please enter a Room No and futher things for admitting the patient. ThankYou! ");
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Enter Patient Blood group:");
+      String  blood =scanner.nextLine();
+      System.out.println("Patient blood group: "+blood); 
+    }
+    
+    public void admitPatient(int roomNumber, String roomType, String date){
+         Scanner scanner = new Scanner(System.in);
+     System.out.println("Enter the date of admission:"); 
+     date=scanner .nextLine();
+     System.out.println("Enter a Room No in which you want to admit your patient:");
+        roomNumber = scanner.nextInt();  
+      System.out.println("Enter the Room type or select from this list: 'Privte Ward' , 'Officer Ward' , 'Local Ward' , 'Simple Room' ");
+       scanner.nextLine();
+      roomType=scanner.nextLine();
+    System.out.println("Room is Assinged!"+roomType);
+     System.out.println("");
+     System.out.println("Patient sucessfully admitted:");
+     System.out.println("Room NO:"+roomNumber);
+     System.out.println("Room Type:"+roomType);
+     System.out.println("Date of admission:"+date);
+      System.out.println();
+    }
+    
+     public void dischargePatient(String date2 , String room, String Type, Object roomNumber, Object roomType )
+    {
+        Scanner r = new Scanner(System.in);
+        System.out.println("### Patient discharged details ###");
+        System.out.println("Enter the date of discharged:");
+        date2 = r.nextLine();
+        System.out.println("Enter the  room number in which Patient are admitted!");
+          room = r.nextLine();
+           System.out.println("Enter room type in which your Paitent are admitted!");
+        Type = r.nextLine();
+         System.out.println();
+          System.out.println("Your pateint are discharge successfully:");
+    }  
+
+   }
