@@ -1,0 +1,231 @@
+class Doctor extends Patient{
+// In this class we use Encapsulation or Arraylistt
+  private String doctorName;
+  private int doctorAge;
+  private String specialization;
+
+  // ArrayList to store doctor specializations 
+  private static final ArrayList<String> specializations = new ArrayList<>();
+  static {
+    specializations.add("Dengue fever");
+    specializations.add("Diabetes");
+    specializations.add("Hepatitis");
+    specializations.add("Cancer");
+    specializations.add("Sugar");
+    specializations.add("Influenza (flu)");
+  }
+
+  public Doctor(String doctorName, int doctorAge, String specialization) {
+    this.doctorName = doctorName;
+    this.doctorAge = doctorAge;
+    this.specialization = specialization;
+  }
+
+  // Getters and Setters (encapsulation)
+  public String getDoctorName() {
+    return doctorName;
+  }
+
+  public void setDoctorName(String doctorName) {
+    this.doctorName = doctorName;
+  }
+
+  public int getDoctorAge() {
+    return doctorAge;
+  }
+
+  public void setDoctorAge(int doctorAge) {
+    this.doctorAge = doctorAge;
+  }
+
+  public String getSpecialization() {
+    return specialization;
+  }
+
+  public void setSpecialization(String specialization) {
+    this.specialization = specialization;
+  }
+
+  // Method to display available specializations
+  public static void displaySpecializations() {
+    System.out.println("Available Specializations:");
+    for (int i = 0; i < specializations.size(); i++) {
+      System.out.println((i + 1) + ". " + specializations.get(i));
+    }
+  }
+
+  // Method to book an appointment 
+  public static void bookAppointment() {
+      Scanner sc=new Scanner(System.in);
+      System.out.println("Enter a choice between 1 to 6:");
+      int choice=sc.nextInt();
+    if (choice <= 0 || choice > specializations.size()) {
+      System.out.println("Invalid Choice! Please enter a valid number.");
+      return;
+    }
+    String bookedSpec = specializations.get(choice - 1);
+    System.out.println("You have booked an appointment with a doctor specializing in " + bookedSpec);
+  }
+}
+
+abstract class TotalBill {
+    
+    protected double totalAmount;
+
+    public TotalBill(double totalAmount) // concrete Method 
+    {
+        this.totalAmount = totalAmount;
+    }
+
+    public abstract void generateBill();  // Abstract method
+}
+class PatientBill extends TotalBill{
+     private double medicalProceduresCost;
+    private double consultationsCost;
+    private double testsCost;
+    private double medicationsCost;
+    private double roomCharges;
+
+    public PatientBill(double medicalProceduresCost, double consultationsCost, double testsCost, double medicationsCost, double roomCharges) {
+        super(0); 
+        this.medicalProceduresCost = medicalProceduresCost;
+        this.consultationsCost = consultationsCost;
+        this.testsCost = testsCost;
+        this.medicationsCost = medicationsCost;
+        this.roomCharges = roomCharges;
+    }
+    
+     @Override
+     public void generateBill() {  // Create a body of abstract method
+        totalAmount = medicalProceduresCost + consultationsCost + testsCost + medicationsCost + roomCharges;
+        System.out.println("Total Bill:");
+         System.out.println();
+        System.out.println("Medical Procedures Cost: $" + medicalProceduresCost);
+        System.out.println("Consultations Cost: $" + consultationsCost);
+        System.out.println("Tests Cost: $" + testsCost);
+        System.out.println("Medications Cost: $" + medicationsCost);
+        System.out.println("Room Charges: $" + roomCharges);
+        System.out.println("Total Amount Due: $" + totalAmount);
+        System.out.println();
+        System.out.println("Please clear these dues before discharge your patient ");
+    }
+}
+class DiscountPatient  // Crete a class for Patient discount
+ {
+    private String name;
+    protected double income;
+    public String getName() 
+    {
+        return name;
+    }
+
+    public void setName(String name) 
+    {
+        this.name = name;
+    }
+
+    public double getIncome() 
+    {
+        return income;
+    }
+
+    public void setIncome(double income) 
+    {
+        this.income = income;
+    }
+}
+
+class Bill 
+ {
+   private DiscountPatient patient;
+  private double totalAmount;
+
+  public Bill(DiscountPatient patient, double totalAmount) {
+    this.patient = patient;
+    this.totalAmount = totalAmount;
+    
+  }
+  public DiscountPatient getPatient()
+    {
+        return patient;
+    }
+  public double getTotalAmount() 
+    {
+        return totalAmount;
+    }
+  
+  public double calculateBill() {
+    if (patient.getIncome() < 30000) {
+      return totalAmount * 0.5;
+    } else {
+      return totalAmount;
+    }
+  }
+   public void generateBill() {
+    double finalAmount = calculateBill();
+    System.out.println("Patient: " + patient.getName());
+    System.out.println("Total Amount: $" + totalAmount);
+    if (finalAmount != totalAmount) {
+      System.out.println("Discount Applied: 50%");
+    }
+    System.out.println("Final Amount Due: $" + finalAmount);
+  }
+
+}
+
+public class Final_Project {
+    public static void main(String[] args) {
+        
+       UserAccount user=new UserAccount(); // object of class userAccount
+       user.login();
+         System.out.println("....Welcome to our online Hosptoial Management System....");
+         System.out.println("");
+       // object of class hospital
+         System.out.println("--------------------------------------");
+         System.out.println();
+        Hospital hospital = new Hospital("Quaid_e_Azam International Hospital Islamabad","Main Peshawar Road H-13 Islamabad");
+        System.out.println("Hospital name: " + hospital.name);
+        System.out.println("");
+        System.out.println("Hospital location: " + hospital.address);
+        hospital.details(); // Detail method in class Hospital
+        System.out.println("");
+        System.out.println("--------------------------------------");
+        System.out.println("Please Enter the Information of your Patient.");
+        Patient p = new Patient();  // object of class patient
+        p.Patient("", 0, "", "", "","");
+        p.Patient("");
+        p.admitPatient(0," "," ");
+      
+         System.out.println();
+         
+         // creating an object of class doctor
+         Doctor doctor1 = new Doctor("Dr.Alice",38,"Diabetes");
+             // Display available specializations
+          Doctor.displaySpecializations();
+           System.out.println();
+          // Book an appointment
+          Doctor.bookAppointment();
+          
+           System.out.println(); 
+        double medicalProceduresCost = 2000.0;
+        double consultationsCost = 400.0;
+        double testsCost = 1500.0;
+        double medicationsCost = 3200.0;
+        double roomCharges = 750.0;
+
+        PatientBill patientBill = new PatientBill(medicalProceduresCost, consultationsCost, testsCost, medicationsCost, roomCharges);
+        patientBill.generateBill();
+        p.dischargePatient(" ", " ", " ", 0, 0); // Discharge Method 
+        
+        // Discount patient class object
+        DiscountPatient patient1 = new DiscountPatient();
+        patient1.setName("Afzal");
+        patient1.setIncome(7850.0); 
+        
+         Bill bill1 = new Bill(patient1, 7850);
+         System.out.println();
+        System.out.println("### Patient's Bill after discount: ###");
+        bill1.generateBill();
+
+    } 
+}
